@@ -6,7 +6,7 @@ export class TestConfig{
     
   
     //valid login credentials
-    email="pavanol@abc.com"
+    email="deepak123@gmail.com"
     password="test@123"
 
     //product details

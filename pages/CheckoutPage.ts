@@ -3,7 +3,7 @@ import { Page, expect, Locator } from '@playwright/test';
 export class CheckoutPage {
     private readonly page: Page;
     
-    // Locators
+   
     private readonly radioGuest: Locator;
     private readonly btnContinue: Locator;
     private readonly txtFirstName: Locator;
@@ -27,7 +27,7 @@ export class CheckoutPage {
     constructor(page: Page) {
         this.page = page;
         
-        // Initialize locators with CSS selectors
+        
         this.radioGuest = page.locator('input[value="guest"]');
         this.btnContinue = page.locator('#button-account');
         this.txtFirstName = page.locator('#input-payment-firstname');
@@ -49,7 +49,6 @@ export class CheckoutPage {
         this.lblOrderConMsg = page.locator('#content h1');
     }
 
-    // Check if checkout page exists
     async isCheckoutPageExists() {
         try {
             await expect(this.page).toHaveTitle("Checkout");
@@ -59,19 +58,16 @@ export class CheckoutPage {
         }
     }
     
-    // Choose checkout option
     async chooseCheckoutOption(checkOutOption: string){
         if (checkOutOption === "Guest Checkout") {
             await this.radioGuest.click();
         }
     }
 
-    // Click on continue button
     async clickOnContinue(){
         await this.btnContinue.click();
     }
 
-    // Form field methods
     async setFirstName(firstName: string){
         await this.txtFirstName.fill(firstName);
     }
@@ -104,7 +100,6 @@ export class CheckoutPage {
         await this.drpState.selectOption({ label: state });
     }
 
-    // Continue button methods
     async clickOnContinueAfterBillingAddress() {
         await this.btnContinueBillingAddress.click();
     }
@@ -113,7 +108,6 @@ export class CheckoutPage {
         await this.btnContinueDeliveryAddress.click();
     }
 
-    // Delivery method
     async setDeliveryMethodComment(deliveryMsg: string) {
         await this.txtDeliveryMethod.fill(deliveryMsg);
     }
@@ -122,7 +116,6 @@ export class CheckoutPage {
         await this.btnContinueShippingAddress.click();
     }
 
-    // Terms and conditions
     async selectTermsAndConditions() {
         await this.chkboxTerms.check();
     }
@@ -131,7 +124,6 @@ export class CheckoutPage {
         await this.btnContinuePaymentMethod.click();
     }
 
-    // Order confirmation
     async getTotalPriceBeforeConfOrder() {
         return await this.lblTotalPrice.textContent();
     }
@@ -142,7 +134,6 @@ export class CheckoutPage {
 
     async isOrderPlaced() {
         try {
-            // Handle alert if present
             if (this.page.on('dialog', dialog => dialog.accept())) {
                 await this.page.waitForEvent('dialog');
             }
